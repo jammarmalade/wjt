@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">微景通</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">设置</string>
+    <string name="company_name">重庆微景通科技有限公司</string>
+
+    <string name="home">首页</string>
+    <string name="business">主要业务</string>
+    <string name="advantage">核心优势</string>
+    <string name="solution">解决方案</string>
+    <string name="experience">产品体验</string>
+    <string name="about">关于我们</string>
+    <string name="cooperation">与我们合作</string>
+
+    <string name="home_our_client">我们的客户</string>
+    <string name="home_our_client_EN">OUR CLIENT</string>
+    <string name="home_new">公司动态</string>
+    <string name="home_new_EN">NEWS</string>
+    <string name="load_more">加载更多</string>
+</resources>

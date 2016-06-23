@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!-- 第二个位置 -->
+    <!-- 用来放Drawerlayout中的内容，
+    这里使用NavigationView来实现类似Google pLay中的侧滑栏效果，
+    必须在build.gradle中添加 compile 'com.android.support:design:23.4.0'
+    另外，如果不需要NavigationView效果，
+    也可以放置一个普通布局文件就是一个普通的侧滑栏了。
+     -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
+    <!--
+     注意：
+    如果使用NavigationView（其他控件也是一样）的特有属性，需要加上命名空间：
+    xmlns:app="http://schemas.android.com/apk/res-auto"；
+    另外，一定要添加android:layout_gravity="left"属性。
+     -->
+    <!--
+属性解析：
+app:headerLayout：    NavigationView中头部的head部分的布局，是自己实现的；
+app:menu：            指定Nav中的Menu布局，就是自己写Menu中的按钮，要放在res/menu/文件夹下；
+app:itemTextColor：  用来设置Nav中，menu item的颜色选择器。
+还有一些属性：和itemTextColor用法一样，指定一个颜色选择器，实现不同的颜色效果。
+app:itemIconTint:
+app:itemBackground:
+    -->
+</android.support.v4.widget.DrawerLayout>

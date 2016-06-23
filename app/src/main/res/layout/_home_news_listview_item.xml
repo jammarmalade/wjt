@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+    
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:layout_weight="3"
+        android:id="@+id/home_news_img"
+        android:scaleType="fitXY"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
+        <TextView
+            android:id="@+id/home_news_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/color_black"
+            android:text="微景通CEO许伟受邀参加第二届文旅产业资源对接大会" />
+        <TextView
+            android:id="@+id/home_news_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:text="借着文博会的东风，由中国旅游资源整合联盟主办的第二届（中国·深圳）文旅产业资源对接大会于5月13日在深圳会展中心正式拉开帷幕。"/>
+    </LinearLayout>
+</LinearLayout>

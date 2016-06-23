@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 自动选中 android:checkableBehavior="single" -->
+    <group >
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_business"
+            android:icon="@drawable/zyyw"
+            android:title="@string/business"/>
+        <item
+            android:id="@+id/nav_advantage"
+            android:icon="@drawable/hxys"
+            android:title="@string/advantage"/>
+        <item
+            android:id="@+id/nav_solution"
+            android:icon="@drawable/jjfa"
+            android:title="@string/solution"/>
+        <item
+            android:id="@+id/nav_experience"
+            android:icon="@drawable/cpty"
+            android:title="@string/experience"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/gywm"
+            android:title="@string/about"/>
+        <item
+            android:id="@+id/nav_cooperation"
+            android:icon="@drawable/hz"
+            android:title="@string/cooperation"/>
+    </group>
+
+</menu>
