@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.test.www.myapplication.R;
 import com.test.www.myapplication.model.ActivityCollector;
 import com.test.www.myapplication.model.BaseApplication;
+import com.test.www.myapplication.util.LogUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +30,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public static final String TAG = "BaseActivity";
     private static ProgressDialog progressDialog;
     private long mExitTime;
-    public String toolBarTitle = BaseApplication.getContext().getResources().getString(R.string.app_name);
+    public String toolBarTitle ;
     public int checkedItemId;
     public NavigationView navigationView;
 
@@ -45,6 +46,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         //获取当前 Activity 的名称
 //        LogUtil.d(TAG, getClass().getSimpleName());
+
     }
 
     //初始化侧边栏导航栏等数据
@@ -75,13 +77,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     }
     //按两次退出程序
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        //是在首页
+        if (getRunningActivityName().equals("HomeActivity") && keyCode == KeyEvent.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
                 Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 mExitTime = System.currentTimeMillis();
-
             } else {
-                finish();
+                ActivityCollector.finishAll();
             }
             return true;
         }
@@ -132,7 +134,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 //不是当前活动才启动
                 if(checkedItemId!=0){
                     HomeActivity.actionStart(this);
-                    finish();
+//                    finish();
                 }
                 break;
             case R.id.nav_business:
@@ -140,7 +142,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "主要业务";
                 if(checkedItemId!=1){
                     BusinessActivity.actionStart(this);
-                    finish();
+//                    finish();
                 }
                 break;
             case R.id.nav_advantage:
@@ -148,7 +150,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "核心优势";
                 if(checkedItemId!=2){
                     AdvantageActivity.actionStart(this);
-                    finish();
+//                    finish();
                 }
                 break;
             case R.id.nav_solution:
@@ -156,7 +158,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "解决法案";
                 if(checkedItemId!=3){
                     SolutionActivity.actionStart(this);
-                    finish();
+//                    finish();
                 }
                 break;
             case R.id.nav_experience:
@@ -164,7 +166,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "产品体验";
                 if(checkedItemId!=4){
                     ExperienceActivity.actionStart(this);
-                    finish();
+//                    finish();
                 }
                 break;
             case R.id.nav_about:
@@ -172,7 +174,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "关于我们";
                 if(checkedItemId!=5){
                     AboutActivity.actionStart(this);
-                    finish();
+//                    finish();
                 }
                 break;
             case R.id.nav_cooperation:
@@ -180,7 +182,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "合作";
                 if(checkedItemId!=6){
                     CooperationActivity.actionStart(this);
-                    finish();
+//                    finish();
                 }
                 break;
             default:
@@ -248,5 +250,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     //获取默认图片，加载之前
     public static Bitmap getPreLoadImg(){
         return BaseActivity.getBitmapFromRes(R.drawable.loading);
+    }
+    //获取当前运行的 activity 名称
+    private String getRunningActivityName() {
+        String contextString = this.toString();
+        return contextString.substring(contextString.lastIndexOf(".") + 1, contextString.indexOf("@"));
     }
 }

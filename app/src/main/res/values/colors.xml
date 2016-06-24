@@ -10,4 +10,9 @@
     <color name="color_gray_1">#c1c1c1</color>
     <color name="color_gray_2">#808080</color>
     <color name="color_gray_3">#818181</color>
+    <color name="color_gray_4">#F4F4F4</color>
+    <color name="color_red">#FF6B67</color>
+    <color name="color_purple">#B18BF2</color>
+    <color name="color_green_light">#22D796</color>
+    <color name="color_brown">#FF9660</color>
 </resources>

@@ -3,6 +3,8 @@ package com.test.www.myapplication.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.test.www.myapplication.model.NewsModel;
 import com.test.www.myapplication.util.CacheUtil;
 import com.test.www.myapplication.util.HttpCallbackListener;
 import com.test.www.myapplication.util.HttpUtil;
+import com.test.www.myapplication.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,31 +39,39 @@ public class HomeActivity extends BaseActivity {
     private static final String REQUEST_URL_ARTICLE = REQUEST_HOST+"?c=api&a=getArticle";
 
     private String cacheName = "activity_home";//缓存名字
-    private ListView homeListView;
     private RecyclerView mRecyclerView;
     private HomeListAdapter mAdapter;
     private Integer newsListNextPage = 2;//公司动态列表初始页数
     private int cacheTime = 10;//缓存时间
     private int newsId = 23;//公司动态的导航id
     private ArrayList<HomeModel> homeData;
+    private final int UPDATE_NEWS = 0;//更新公司动态列表
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case UPDATE_NEWS:
+                    updateNewsList((String) msg.obj);
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         //选中状态
         checkedItemId = 0;
+        //标题
+        toolBarTitle = getResources().getString(R.string.app_name);
         //初始化导航
         initNav();
-
-        //使用layoutInflater布局
-//        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.content_main);
-//        LayoutInflater layoutInflater = LayoutInflater.from(this);
-//        View homeLayout = layoutInflater.inflate(R.layout.activity_home, null);
-//        mainLayout.addView(homeLayout);
-//        homeListView = (ListView) findViewById(R.id.list_home);
-
 
         //设置数据
         onQueryData();
@@ -121,6 +132,7 @@ public class HomeActivity extends BaseActivity {
     public void getNewsList(){
         if(newsListNextPage.equals(0)){
             mToast("没有数据啦~");
+            findViewById(R.id.news_loadmore_ll).setVisibility(View.GONE);
             return ;
         }
         final String newsCacheName = "newsList"+newsListNextPage;
@@ -136,12 +148,16 @@ public class HomeActivity extends BaseActivity {
                     }else{
                         //存储数据
                         CacheUtil.writeJson(HomeActivity.this, res.toString(), newsCacheName, false);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                updateNewsList(newsCacheName);
-                            }
-                        });
+                        Message message = new Message();
+                        message.what = UPDATE_NEWS;
+                        message.obj = newsCacheName;
+                        mHandler.sendMessage(message);
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                updateNewsList(newsCacheName);
+//                            }
+//                        });
                     }
                 }
 
@@ -171,7 +187,10 @@ public class HomeActivity extends BaseActivity {
                 //更改下一页
                 newsListNextPage = tmpNewsObj.getInt("nextPage");
                 //若是为 0 就隐藏加载更多
-                findViewById(R.id.news_loadmore_ll).setVisibility(View.GONE);
+                if(newsListNextPage.equals(0)){
+                    LogUtil.d(TAG," - "+newsListNextPage);
+                    findViewById(R.id.news_loadmore_ll).setVisibility(View.GONE);
+                }
                 JSONArray tmpNewsList = tmpNewsObj.getJSONArray("newsList");
                 for(int i=0;i <tmpNewsList.length();i++) {
                     JSONObject tmpData = tmpNewsList.getJSONObject(i);
@@ -186,6 +205,7 @@ public class HomeActivity extends BaseActivity {
                 //通知更新 item
                 homeData.get(3).setNews(newsList);
                 mAdapter.notifyItemChanged(3);
+//                mRecyclerView.smoothScrollBy(0,mRecyclerView.getMeasuredHeight());//滑动到底部
             }catch (Exception e){
                 e.printStackTrace();
             }

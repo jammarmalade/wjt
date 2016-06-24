@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -102,7 +103,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     type1Holder.subtitle.setText(homeModel.getSubTitle());
                     type1Holder.subtitle.setVisibility(View.VISIBLE);
                 }
-                LogUtil.d(BaseActivity.TAG,"adt - 96 "+homeModel.getImgUrl());
                 //若是图片链接为空，就使用本地的banner图
                 if("".equals(homeModel.getImgUrl())){
                     type1Holder.banner.setImageResource(R.drawable.banner);
@@ -207,10 +207,19 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case TYPE_4:
                 final Type4Holder type4Holder = (Type4Holder)holder;
                 //数据
-                ArrayList<NewsModel> newsList = homeModel.getNews();
+                final ArrayList<NewsModel> newsList = homeModel.getNews();
                 HomeNewsAdapter homeNewsAdapter = new HomeNewsAdapter(mContext , R.layout._home_news_listview_item, newsList);
                 type4Holder.newsListview.setAdapter(homeNewsAdapter);
                 Unity.setListViewHeight(type4Holder.newsListview);
+                //item 点击事件
+                type4Holder.newsListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        //当前点击的数据
+                        NewsModel newsModel = newsList.get(position);
+                        BaseActivity.mToastStatic(newsModel.getSubject());
+                    }
+                });
                 //加载更多事件
                 type4Holder.newsLoadmore.setOnClickListener(new View.OnClickListener() {
                     @Override

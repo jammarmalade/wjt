@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/business_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="微景通以“微信支付”为核心搭建的微信智慧景区解决方案，通过信息触达、实时互动、社交分享等多重核心优势，帮助传统景区通过移动互联网加速实现信息化进程。"
+        android:padding="10dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="273dp"
+            android:layout_height="230dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bus_main"
+            android:layout_centerHorizontal="true"/>
+        <ImageButton
+            android:id="@+id/btn_ydznty"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="80dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bus_ydznty_g"/>
+        <ImageButton
+            android:id="@+id/btn_shhyx"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="230dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bus_shhyx"/>
+        <ImageButton
+            android:id="@+id/btn_sjhyx"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="148dp"
+            android:layout_marginLeft="40dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bus_sjhyx"/>
+        <ImageButton
+            android:id="@+id/btn_ydds"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="139dp"
+            android:layout_marginLeft="200dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bus_ydds"/>
+    </RelativeLayout>
+</LinearLayout>
