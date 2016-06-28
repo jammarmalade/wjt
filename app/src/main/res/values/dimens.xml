@@ -6,4 +6,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <!-- 内容边距 （界面相对于手机的上下左右边框） 10dp-->
+    <dimen name="activity_paddingLeft">10dp</dimen>
+    <dimen name="activity_paddingRight">10dp</dimen>
+    <dimen name="activity_paddingBottom">10dp</dimen>
+    <dimen name="activity_paddingTop">10dp</dimen>
 </resources>
