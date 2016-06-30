@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PagerSlidingTabStrip">
+        <!-- 选中项的下划线颜色 -->
+        <attr name="pstsIndicatorColor" format="color" />
+        <!-- 底部线颜色 -->
+        <attr name="pstsUnderlineColor" format="color" />
+        <!-- 分割线的颜色 -->
+        <attr name="pstsDividerColor" format="color" />
+        <!-- 选中项的下划线高度 -->
+        <attr name="pstsIndicatorHeight" format="dimension" />
+        <!-- 底部线的高度 -->
+        <attr name="pstsUnderlineHeight" format="dimension" />
+        <!-- 分割线的上下间距 -->
+        <attr name="pstsDividerPaddingTopBottom" format="dimension" />
+        <!-- 文本的左右间距 -->
+        <attr name="pstsTabPaddingLeftRight" format="dimension" />
+        <attr name="pstsScrollOffset" format="dimension" />
+        <!-- 每一个TAB的背景 -->
+        <attr name="pstsTabBackground" format="reference" />
+        <!-- 该属性表示里面的TAB是否均分整个PagerSlidingTabStrip控件的宽,true是,false不均分,从左到右排列,默认false-->
+        <attr name="pstsShouldExpand" format="boolean" />
+        <!-- 所有的小写英文文本自动大写 ,默认是true,默认大写 -->
+        <attr name="pstsTextAllCaps" format="boolean" />
+        <!-- TAB选中的颜色 -->
+        <attr name="pstsTextSelectedColor" format="color"/>
+        <!-- 选中项字体的缩放的最大值,0.3表示放大后最大是原来的0.3倍,默认未0.3-->
+        <attr name="pstsScaleZoomMax" format="float"/>
+        <!-- 当点击tab时内容区域Viewpager是否是左右滑动,默认是true -->
+        <attr name="pstsSmoothScrollWhenClickTab" format="boolean"/>
+    </declare-styleable>
+
+</resources>
