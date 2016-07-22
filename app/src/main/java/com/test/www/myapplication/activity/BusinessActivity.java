@@ -112,7 +112,7 @@ public class BusinessActivity extends BaseActivity{
 
                                 clssifyView.findViewById(R.id.item_ydznty).setVisibility(View.GONE);
                                 clssifyView.findViewById(R.id.item_shhyx).setVisibility(View.GONE);
-                                clssifyView.findViewById(R.id.item_shhyx).setVisibility(View.VISIBLE);
+                                clssifyView.findViewById(R.id.item_sjhyx).setVisibility(View.VISIBLE);
                                 clssifyView.findViewById(R.id.item_ydds).setVisibility(View.GONE);
                                 break;
                             case R.id.btn_ydds:

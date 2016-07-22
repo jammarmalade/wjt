@@ -34,7 +34,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public int checkedItemId;
     public NavigationView navigationView;
 
-    public static final String REQUEST_HOST = "http://192.168.1.10/php/www_weijingtong_com/";//公司
+    public static final String REQUEST_HOST = "http://192.168.1.29/php/www_weijingtong_com/";//公司
 //    public static final String REQUEST_HOST = "http://192.168.1.46/wjt/";//家
 
     @Override

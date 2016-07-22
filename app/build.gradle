@@ -29,4 +29,5 @@ dependencies {
     compile files('libs/gson-2.2.4.jar')
     compile files('libs/volley.jar')
     compile files('libs/nineoldandroids.jar')
+    compile 'com.jude:rollviewpager:1.3.2'
 }

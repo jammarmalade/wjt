@@ -1,10 +1,9 @@
 package com.test.www.myapplication.fragment;
 
-import android.app.Fragment;
 import android.widget.Toast;
 
 import com.test.www.myapplication.model.BaseApplication;
-
+import android.support.v4.app.Fragment;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

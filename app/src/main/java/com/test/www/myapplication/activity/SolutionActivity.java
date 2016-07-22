@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.test.www.myapplication.R;
 import com.test.www.myapplication.adapter.SolutionFragmentAdapter;
+import com.test.www.myapplication.fragment.BaseFragment;
 import com.test.www.myapplication.fragment.SolutionCaseFragment;
 import com.test.www.myapplication.fragment.SolutionSchemeFragment;
 import com.test.www.myapplication.util.PagerSlidingTabStrip;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
  */
 public class SolutionActivity extends BaseActivity{
 
-    private static final String REQUEST_URL = BaseActivity.REQUEST_HOST+"?c=api&a=solution";
+    public static final String REQUEST_URL = REQUEST_HOST+"?c=api&a=solution";
     private String cacheName = "activity_solution";//缓存名字
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
@@ -51,7 +52,7 @@ public class SolutionActivity extends BaseActivity{
         ArrayList<String> titles = new ArrayList<>();
         titles.add("解决方案");
         titles.add("案例");
-        ArrayList<Fragment> fragments = new ArrayList<>();
+        ArrayList<BaseFragment> fragments = new ArrayList<>();
         //解决方案
         Bundle bundle1 = new Bundle();
         bundle1.putString("title", titles.get(0));

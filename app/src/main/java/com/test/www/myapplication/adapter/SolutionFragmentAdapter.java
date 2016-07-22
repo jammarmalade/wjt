@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
+import com.test.www.myapplication.fragment.BaseFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +14,9 @@ public class SolutionFragmentAdapter extends FragmentPagerAdapter {
 
     private ArrayList<String> titles;
 
-    private List<Fragment> fragments;
+    private List<BaseFragment> fragments;
 
-    public SolutionFragmentAdapter(FragmentManager fm, ArrayList<String> list, List<Fragment> fragments) {
+    public SolutionFragmentAdapter(FragmentManager fm, ArrayList<String> list, List<BaseFragment> fragments) {
         super(fm);
         this.titles = list;
         this.fragments=fragments;

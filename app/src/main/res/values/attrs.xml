@@ -2,6 +2,8 @@
 <resources>
 
     <declare-styleable name="PagerSlidingTabStrip">
+        <!-- tab字体颜色 -->
+        <attr name="pstsTabTextColor" format="color" />
         <!-- 选中项的下划线颜色 -->
         <attr name="pstsIndicatorColor" format="color" />
         <!-- 底部线颜色 -->

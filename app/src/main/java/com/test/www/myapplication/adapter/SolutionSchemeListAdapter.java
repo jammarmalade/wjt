@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.test.www.myapplication.R;
 import com.test.www.myapplication.activity.BaseActivity;
-import com.test.www.myapplication.model.ClientModel;
+import com.test.www.myapplication.model.CaseModel;
 import com.test.www.myapplication.model.NewsModel;
 import com.test.www.myapplication.util.LogUtil;
 import com.test.www.myapplication.util.imageLoad.ImageCacheManager;
@@ -19,13 +19,14 @@ import java.util.ArrayList;
 
 /**
  * Created by weijingtong20 on 2016/6/23.
+ * 方案列表
  */
-public class HomeNewsAdapter extends ArrayAdapter<NewsModel> {
+public class SolutionSchemeListAdapter extends ArrayAdapter<CaseModel> {
 
     private Context mContext;
     private int resourceId;
 
-    public HomeNewsAdapter(Context c , int textViewResourceId, ArrayList<NewsModel> dataList){
+    public SolutionSchemeListAdapter(Context c , int textViewResourceId, ArrayList<CaseModel> dataList){
         super(c ,textViewResourceId ,dataList);
         this.mContext = c;
         this.resourceId = textViewResourceId;
@@ -33,30 +34,27 @@ public class HomeNewsAdapter extends ArrayAdapter<NewsModel> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        NewsModel newsModel = getItem(position);
+        CaseModel caseModel = getItem(position);
         View view;
         ViewHolder viewHolder;
         if (convertView == null) {
             view = LayoutInflater.from(mContext).inflate(resourceId, null);
             viewHolder = new ViewHolder();
-            viewHolder.imageView = (ImageView) view.findViewById(R.id.home_news_img);
-            viewHolder.subject = (TextView) view.findViewById(R.id.home_news_subject);
-            viewHolder.desc = (TextView) view.findViewById(R.id.home_news_desc);
+            viewHolder.itemImage = (ImageView) view.findViewById(R.id.scheme_listview_iv);
+            viewHolder.itemSubTitle = (TextView) view.findViewById(R.id.scheme_listview_subTitle);
             view.setTag(viewHolder);
         } else {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
-        ImageCacheManager.loadImage(newsModel.getThumbImg(), viewHolder.imageView,
+        ImageCacheManager.loadImage(caseModel.getImgUrl(), viewHolder.itemImage,
                 BaseActivity.getPreLoadImg(),
                 BaseActivity.getPreLoadImg());
-        viewHolder.subject.setText(newsModel.getSubject());
-        viewHolder.desc.setText(newsModel.getDescription());
+        viewHolder.itemSubTitle.setText(caseModel.getSubTitle());
         return view;
     }
     class ViewHolder{
-        ImageView imageView;
-        TextView subject;
-        TextView desc;
+        ImageView itemImage;
+        TextView itemSubTitle;
     }
 }

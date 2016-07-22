@@ -26,7 +26,6 @@ public class HttpUtil {
                 try {
                     URL url = new URL(address);
                     connection = (HttpURLConnection)url.openConnection();
-
                     //若数据不为空则发送 post 请求
                     if(data.equals("")){
                         connection.setRequestMethod("GET");

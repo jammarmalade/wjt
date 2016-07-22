@@ -141,7 +141,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         // get system attrs (android:textSize and android:textColor)
         TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
         tabTextSize = a.getDimensionPixelSize(0, tabTextSize);
-        tabTextColor = a.getColor(1, tabTextColor);
+        //突然报错 Can't convert to color: type=0x5
+//        tabTextColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsTabTextColor, tabTextColor);
         a.recycle();
 
         // get custom attrs

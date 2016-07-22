@@ -87,7 +87,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 Type4Holder type4Holder = new Type4Holder(LayoutInflater.from(mContext).inflate(R.layout._home_news_item, parent, false));
                 holder = type4Holder;
                 break;
-
         }
         return holder;
     }
