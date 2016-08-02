@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.test.www.myapplication.R;
+import com.test.www.myapplication.model.BaseApplication;
 
 /**
  * 与我们合作
@@ -17,7 +20,7 @@ public class CooperationActivity extends BaseActivity{
 
     private static final String REQUEST_URL = BaseActivity.REQUEST_HOST+"?c=api&a=cooperation";
     private String cacheName = "activity_cooperation";//缓存名字
-
+    private int cacheTime = 10;//缓存时间
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class CooperationActivity extends BaseActivity{
 
         //选中状态
         checkedItemId = 6;
+        toolBarTitle = getResources().getString(R.string.cooperation);
         //初始化导航
         initNav();
 

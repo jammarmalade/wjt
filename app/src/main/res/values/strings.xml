@@ -4,7 +4,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">设置</string>
     <string name="company_name">重庆微景通科技有限公司</string>
 
     <string name="home">首页</string>
@@ -25,4 +24,9 @@
     <string name="business_tag_shhyx">社会化营销</string>
     <string name="business_tag_sjhyx">数据化运营</string>
     <string name="business_tag_ydds">移动电商</string>
+
+    <string name="action_settings">设置</string>
+    <string name="action_view">查看</string>
+    <string name="action_camera">拍照</string>
+    <string name="action_search">搜索</string>
 </resources>

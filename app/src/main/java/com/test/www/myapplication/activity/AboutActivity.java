@@ -66,10 +66,10 @@ public class AboutActivity extends BaseActivity{
         initNav();
 
         //使用layoutInflater布局
-        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.content_main);
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View homeLayout = layoutInflater.inflate(R.layout.activity_about, null);
-        mainLayout.addView(homeLayout);
+//        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.content_main);
+//        LayoutInflater layoutInflater = LayoutInflater.from(this);
+//        View homeLayout = layoutInflater.inflate(R.layout.activity_about, null);
+//        mainLayout.addView(homeLayout);
 
         onQueryData();
     }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="33dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/exp_zntyl"
+        android:id="@+id/exp_icon"/>
+    <TextView
+        android:layout_weight="8"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="智能体验类"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:id="@+id/exp_nav_title"/>
+    <ImageView
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_menu_go_right"
+        />
+</LinearLayout>

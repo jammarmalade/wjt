@@ -1,20 +1,30 @@
 package com.test.www.myapplication.activity;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.test.www.myapplication.R;
@@ -25,6 +35,8 @@ import com.test.www.myapplication.util.LogUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Method;
+
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String TAG = "BaseActivity";
@@ -34,7 +46,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public int checkedItemId;
     public NavigationView navigationView;
 
-    public static final String REQUEST_HOST = "http://192.168.1.29/php/www_weijingtong_com/";//公司
+    public static final String REQUEST_HOST = "http://192.168.1.28/php/www_weijingtong_com/";//公司
 //    public static final String REQUEST_HOST = "http://192.168.1.46/wjt/";//家
 
     @Override
@@ -53,9 +65,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public void initNav(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //设置 toolbar 的图标
-//        toolbar.setLogo(R.mipmap.ic_launcher);
-        //顶部导航中间的文字
-        toolbar.setTitle(toolBarTitle);
+//          toolbar.setLogo(R.mipmap.ic_launcher);
+        //顶部导航中间的文字（为使标题居中，要加一个textview）
+        toolbar.setTitle("");
+        TextView textView = (TextView) findViewById(R.id.toolbar_title);
+        textView.setText(toolBarTitle);
         setSupportActionBar(toolbar);//执行设定
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,13 +80,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         //选中状态
         navigationView.getMenu().getItem(checkedItemId).setChecked(true);
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //关闭所以活动
+        //关闭所有活动
         ActivityCollector.removeActivity(this);
     }
     //按两次退出程序
@@ -105,20 +118,81 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        // 配置SearchView的属性
+//        MenuItem searchItem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) searchItem.getActionView();
+//        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+//            @Override
+//            public boolean onMenuItemActionExpand(MenuItem item) {
+//                LogUtil.d(TAG,"打开 - 对应的 UI 操作");
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onMenuItemActionCollapse(MenuItem item) {
+//                LogUtil.d(TAG,"收起 - 对应的 UI 操作");
+//                return true;
+//            }
+//        });
+
         return true;
     }
-
+    //Overflow 列表显示图标
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        setOverflowIconVisible(featureId, menu);
+        return super.onMenuOpened(featureId, menu);
+    }
+    @Override
+    protected boolean onPrepareOptionsPanel(View view, Menu menu) {
+        //显示OverflowMenu的Icon (这个起作用)
+        if (menu != null) {
+            if (menu.getClass() == MenuBuilder.class) {
+                try {
+                    Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                } catch (Exception e) {
+                    LogUtil.d(TAG, "OverflowIconVisible - "+e.getMessage());
+                }
+            }
+        }
+        return super.onPrepareOptionsPanel(view, menu);
+    };
+    /**
+     * 显示OverflowMenu的Icon
+     *
+     * @param featureId
+     * @param menu
+     */
+    private void setOverflowIconVisible(int featureId, Menu menu) {
+        if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+                try {
+                    Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                } catch (Exception e) {
+                    LogUtil.d(TAG, "OverflowIconVisible - "+e.getMessage());
+                }
+            }
+        }
+    }
+    //Action按钮 点击事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                mToast("162 - setting");
+                break;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -142,7 +216,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "主要业务";
                 if(checkedItemId!=1){
                     BusinessActivity.actionStart(this);
-//                    finish();
                 }
                 break;
             case R.id.nav_advantage:
@@ -150,7 +223,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "核心优势";
                 if(checkedItemId!=2){
                     AdvantageActivity.actionStart(this);
-//                    finish();
                 }
                 break;
             case R.id.nav_solution:
@@ -158,7 +230,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "解决法案";
                 if(checkedItemId!=3){
                     SolutionActivity.actionStart(this);
-//                    finish();
                 }
                 break;
             case R.id.nav_experience:
@@ -166,7 +237,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "产品体验";
                 if(checkedItemId!=4){
                     ExperienceActivity.actionStart(this);
-//                    finish();
                 }
                 break;
             case R.id.nav_about:
@@ -174,7 +244,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "关于我们";
                 if(checkedItemId!=5){
                     AboutActivity.actionStart(this);
-//                    finish();
                 }
                 break;
             case R.id.nav_cooperation:
@@ -182,13 +251,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 choose = "合作";
                 if(checkedItemId!=6){
                     CooperationActivity.actionStart(this);
-//                    finish();
                 }
                 break;
             default:
                 break;
         }
-        Toast.makeText(this, "135 "+choose, Toast.LENGTH_SHORT).show();
+        mToast("135 "+choose);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

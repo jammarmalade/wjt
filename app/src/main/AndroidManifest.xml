@@ -46,6 +46,10 @@
             android:name=".activity.SolutionActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"/>
+        <activity
+            android:name=".activity.NavArticleActivity"
+            android:launchMode="singleTask"
+            android:parentActivityName=".activity.ExperienceActivity"/>
     </application>
 
 </manifest>

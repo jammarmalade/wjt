@@ -96,8 +96,10 @@ public class CacheUtil {
             return result;
         }
         //是否过了缓存期
-        if((System.currentTimeMillis() - des.lastModified()) > (expire * 1000)){
-            return result;
+        if(expire>0){
+            if((System.currentTimeMillis() - des.lastModified()) > (expire * 1000)){
+                return result;
+            }
         }
         try {
             fis = new FileInputStream(des);

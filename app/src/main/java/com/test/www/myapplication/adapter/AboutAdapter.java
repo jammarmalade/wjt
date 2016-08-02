@@ -37,7 +37,7 @@ import java.util.Map;
 
 /**
  * Created by weijingtong20 on 2016/6/17.
- * 首页数据适配器
+ * 关于我们数据适配器
  */
 public class AboutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
@@ -100,7 +100,8 @@ public class AboutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
                 ArticleAdapter articleAdapter = new ArticleAdapter(mContext , R.layout._about_article_listview_item, dateList);
                 type2Holder.aboutArticleLV.setAdapter(articleAdapter);
-//                Unity.setListViewHeightArticle(type2Holder.aboutArticleLV);
+                //重新计算listview高度
+                Unity.setListViewHeight(type2Holder.aboutArticleLV);
                 break;
         }
     }
