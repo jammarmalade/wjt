@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.test.www.myapplication.R;
+import com.test.www.myapplication.activity.ArticleActivity;
 import com.test.www.myapplication.activity.BaseActivity;
 import com.test.www.myapplication.activity.HomeActivity;
 import com.test.www.myapplication.model.BaseApplication;
@@ -197,11 +198,18 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case TYPE_3:
                 final Type3Holder type3Holder = (Type3Holder)holder;
                 //数据
-                ArrayList<ClientModel> clientList = homeModel.getClients();
+                final ArrayList<ClientModel> clientList = homeModel.getClients();
                 HomeClientAdapter homeClientAdapter = new HomeClientAdapter(mContext , R.layout._home_client_gridview_item, clientList);
                 type3Holder.clientGV.setAdapter(homeClientAdapter);
                 //重新计算高度
                 Unity.setGrideViewHeight(type3Holder.clientGV);
+                type3Holder.clientGV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ClientModel clientModel = clientList.get(position);
+                        BaseActivity.mToastStatic(clientModel.getName());
+                    }
+                });
                 break;
             case TYPE_4:
                 final Type4Holder type4Holder = (Type4Holder)holder;
@@ -216,7 +224,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         //当前点击的数据
                         NewsModel newsModel = newsList.get(position);
-                        BaseActivity.mToastStatic(newsModel.getSubject());
+                        ArticleActivity.actionStart(BaseApplication.getContext(),newsModel.getId()+"","公司动态","home");
                     }
                 });
                 //加载更多事件

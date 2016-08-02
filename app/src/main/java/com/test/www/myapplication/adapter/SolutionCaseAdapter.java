@@ -53,6 +53,17 @@ public class SolutionCaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageCacheManager.loadImage(caseModel.getImgUrl(), type1Holder.backgroundImage,
                 BaseActivity.getPreLoadImg(),
                 BaseActivity.getPreLoadImg());
+        //点击事件，跳向文章页
+        if (mOnItemClickLitener != null) {
+            type1Holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    int pos = type1Holder.getLayoutPosition();
+                    mOnItemClickLitener.onItemClick(type1Holder.itemView, pos);
+                }
+            });
+        }
     }
 
     @Override

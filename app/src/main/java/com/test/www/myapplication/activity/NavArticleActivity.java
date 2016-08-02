@@ -46,6 +46,7 @@ public class NavArticleActivity extends BaseActivity{
 
     private String cacheName = "activity_experience";//缓存名字
     private String id;
+    private String title ;
     private ArrayList<NavsModel> navsData;
 
     @Override
@@ -54,12 +55,13 @@ public class NavArticleActivity extends BaseActivity{
         setContentView(R.layout.activity_navarticle);
         //传递过来的值
         id = getIntent().getStringExtra("id");
-        String title = getIntent().getStringExtra("title");
+        title = getIntent().getStringExtra("title");
 
         if(!title.equals("") && title!=null){
             setTitle(title);
         }else{
-            setTitle(getResources().getString(R.string.experience));
+            title = getResources().getString(R.string.experience);
+            setTitle(title);
         }
 
         onSetData();
@@ -123,8 +125,7 @@ public class NavArticleActivity extends BaseActivity{
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         NavsModel navsModel = navsData.get(position);
-                        String tmpid = navsModel.getId();
-                        BaseActivity.mToastStatic("id - "+tmpid);
+                        ArticleActivity.actionStart(NavArticleActivity.this,navsModel.getId(),title,"product");
                     }
                 });
             }else{

@@ -44,6 +44,7 @@
                         android:layout_marginTop="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:autoLink="all"
                         android:text="和商务DB沟通需求\n电话:023-86506787\n邮箱：market@weijingtong.com"/>
                     <TextView
                         android:id="@+id/coon_setp2"

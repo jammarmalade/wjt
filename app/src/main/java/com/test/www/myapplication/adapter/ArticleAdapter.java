@@ -49,7 +49,6 @@ public class ArticleAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LogUtil.d(BaseActivity.TAG,position+ " - position");
         String content = getItem(position);
         View view;
         final ViewHolder viewHolder;

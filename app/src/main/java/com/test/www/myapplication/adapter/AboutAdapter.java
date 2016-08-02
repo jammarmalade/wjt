@@ -1,39 +1,20 @@
 package com.test.www.myapplication.adapter;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.jude.rollviewpager.RollPagerView;
-import com.jude.rollviewpager.adapter.StaticPagerAdapter;
-import com.jude.rollviewpager.hintview.TextHintView;
 import com.test.www.myapplication.R;
-import com.test.www.myapplication.activity.BaseActivity;
 import com.test.www.myapplication.model.AboutModel;
 import com.test.www.myapplication.model.ArticleModel;
-import com.test.www.myapplication.model.BaseApplication;
-import com.test.www.myapplication.model.ClientModel;
-import com.test.www.myapplication.model.HomeModel;
-import com.test.www.myapplication.model.IconModel;
 import com.test.www.myapplication.model.ImageModel;
-import com.test.www.myapplication.model.NewsModel;
-import com.test.www.myapplication.util.LogUtil;
 import com.test.www.myapplication.util.Unity;
-import com.test.www.myapplication.util.imageLoad.ImageCacheManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by weijingtong20 on 2016/6/17.
@@ -98,7 +79,7 @@ public class AboutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 ArticleModel articleModel = aboutModel.getArticle();
                 ArrayList<String> dateList = articleModel.getContentList();
 
-                ArticleAdapter articleAdapter = new ArticleAdapter(mContext , R.layout._about_article_listview_item, dateList);
+                ArticleAdapter articleAdapter = new ArticleAdapter(mContext , R.layout._article_listview_item, dateList);
                 type2Holder.aboutArticleLV.setAdapter(articleAdapter);
                 //重新计算listview高度
                 Unity.setListViewHeight(type2Holder.aboutArticleLV);

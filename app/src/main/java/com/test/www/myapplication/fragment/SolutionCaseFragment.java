@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.test.www.myapplication.R;
+import com.test.www.myapplication.activity.ArticleActivity;
 import com.test.www.myapplication.activity.BaseActivity;
 import com.test.www.myapplication.activity.SolutionActivity;
 import com.test.www.myapplication.adapter.SolutionCaseAdapter;
@@ -18,6 +19,7 @@ import com.test.www.myapplication.model.CaseModel;
 import com.test.www.myapplication.util.CacheUtil;
 import com.test.www.myapplication.util.HttpCallbackListener;
 import com.test.www.myapplication.util.HttpUtil;
+import com.test.www.myapplication.util.LogUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -116,7 +118,7 @@ public class SolutionCaseFragment extends BaseFragment {
                     @Override
                     public void onItemClick(View view, int position){
                         CaseModel caseModel = caseData.get(position);
-                        BaseActivity.mToastStatic(caseModel.getId()+"");
+                        ArticleActivity.actionStart(BaseApplication.getContext(),caseModel.getId()+"","解决方案","solution");
                     }
                 });
                 mRecyclerView.setAdapter(mAdapter);
