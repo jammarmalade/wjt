@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -49,7 +50,9 @@ public class ArticleActivity extends BaseActivity{
     private TextView time;
     private String from = "";//来源
     private String title = "";
-    private int cacheTime = 10;//缓存时间
+    private LinearLayout article_content ;
+    private LinearLayout article_loading ;
+//    private int cacheTime = 10;//缓存时间
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,8 @@ public class ArticleActivity extends BaseActivity{
         contentLV = (ListView)findViewById(R.id.article_lv);
         subject = (TextView) findViewById(R.id.article_subject);
         time = (TextView)findViewById(R.id.article_time);
+        article_content = (LinearLayout) findViewById(R.id.article_content);
+        article_loading = (LinearLayout)findViewById(R.id.article_loading);
 
         onQueryData();
         setOverflowShowingAlways();
@@ -148,6 +153,8 @@ public class ArticleActivity extends BaseActivity{
                 contentLV.setAdapter(articleAdapter);
                 //重新计算listview高度
                 Unity.setListViewHeight(contentLV);
+                article_content.setVisibility(View.VISIBLE);
+                article_loading.setVisibility(View.GONE);
             }else{
                 mToast("没有数据 - 102");
             }

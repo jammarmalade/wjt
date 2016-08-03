@@ -35,7 +35,7 @@ public class AdvantageActivity extends BaseActivity{
 
     private static final String REQUEST_URL = BaseActivity.REQUEST_HOST+"?c=api&a=advantage";
     private String cacheName = "activity_advantage";//缓存名字
-    private int cacheTime = 10;//缓存时间
+//    private int cacheTime = 10;//缓存时间
     private ArrayMap<String, String> advantageData ;
     private View advLayout;
 

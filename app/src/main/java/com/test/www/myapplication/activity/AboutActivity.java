@@ -48,7 +48,7 @@ public class AboutActivity extends BaseActivity{
 
     private static final String REQUEST_URL = BaseActivity.REQUEST_HOST+"?c=api&a=about";
     private String cacheName = "activity_about";//缓存名字
-    private int cacheTime = 10;//缓存时间
+//    private int cacheTime = 10;//缓存时间
     private RecyclerView mRecyclerView;
     private AboutAdapter mAdapter;
     private ArrayList<AboutModel> aboutData;

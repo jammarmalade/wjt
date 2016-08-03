@@ -1,12 +1,15 @@
 package com.test.www.myapplication.activity;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.NavUtils;
@@ -42,9 +45,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public static final String TAG = "BaseActivity";
     private static ProgressDialog progressDialog;
     private long mExitTime;
-    public String toolBarTitle ;
+    public String toolBarTitle;
     public int checkedItemId;
     public NavigationView navigationView;
+    public static boolean networkStatus ;
+    public static String networkType;
+    public int cacheTime = 600;//缓存时间
+    public static int cacheTimeS = 600;//缓存时间
 
     public static final String REQUEST_HOST = "http://192.168.1.28/php/www_weijingtong_com/";//公司
 //    public static final String REQUEST_HOST = "http://192.168.1.46/wjt/";//家
@@ -59,6 +66,17 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         //获取当前 Activity 的名称
 //        LogUtil.d(TAG, getClass().getSimpleName());
 
+        isNetworkAvailable(this);
+        //网络不可用
+        if(!networkStatus){
+            //缓存时间永不过期
+            cacheTime = 0;
+            cacheTimeS = 0;
+        }
+    }
+    //缓存时间
+    public static int getCacheTime(){
+        return cacheTimeS;
     }
 
     //初始化侧边栏导航栏等数据
@@ -256,7 +274,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             default:
                 break;
         }
-        mToast("135 "+choose);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -300,6 +317,36 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
         return "";
+    }
+    /**
+     * 检查当前网络是否可用
+     *
+     * @param activity
+     * @return
+     */
+    public void isNetworkAvailable(Activity activity) {
+        Context context = activity.getApplicationContext();
+        // 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager == null) {
+            networkStatus = false;
+        } else {
+            // 获取NetworkInfo对象
+            NetworkInfo[] networkInfo = connectivityManager.getAllNetworkInfo();
+            if (networkInfo != null && networkInfo.length > 0) {
+                for (int i = 0; i < networkInfo.length; i++) {
+//                    LogUtil.d(TAG,i + "===状态===" + networkInfo[i].getState());
+//                    LogUtil.d(TAG,i + "===类型===" + networkInfo[i].getTypeName());
+                    // 判断当前网络状态是否为连接状态
+                    if (networkInfo[i].getState() == NetworkInfo.State.CONNECTED) {
+                        networkStatus = true;
+                        networkType = networkInfo[i].getTypeName();
+                    }
+                }
+            }else{
+                networkStatus = false;
+            }
+        }
     }
 
     //弹出消息

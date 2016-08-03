@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -47,6 +48,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public static final int TYPE_2 = 2;//第二栏列表 功能
     public static final int TYPE_3 = 3;//第三栏列表 我们的客户
     public static final int TYPE_4 = 4;//第四栏列表 公司动态
+    public static final int TYPE_99 = 99;//加载更多
     private ArrayList<HomeModel> dataList = new ArrayList<>();//数据集合
     private Context mContext;
     private Handler handler;
@@ -87,6 +89,10 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case TYPE_4:
                 Type4Holder type4Holder = new Type4Holder(LayoutInflater.from(mContext).inflate(R.layout._home_news_item, parent, false));
                 holder = type4Holder;
+                break;
+            case TYPE_99:
+                Type99Holder type99Holder = new Type99Holder(LayoutInflater.from(mContext).inflate(R.layout.loadmore, parent, false));
+                holder = type99Holder;
                 break;
         }
         return holder;
@@ -227,15 +233,17 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         ArticleActivity.actionStart(BaseApplication.getContext(),newsModel.getId()+"","公司动态","home");
                     }
                 });
-                //加载更多事件
-                type4Holder.newsLoadmore.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mOnItemClickLitener.onItemClick(v , position);
-                    }
-                });
+//                //加载更多事件
+//                type4Holder.newsLoadmore.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        mOnItemClickLitener.onItemClick(v , position);
+//                    }
+//                });
                 break;
+            case TYPE_99:
 
+                break;
         }
     }
 
@@ -250,6 +258,8 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return TYPE_3;// 第三栏 客户logo
         } else if ("4".equals(dataList.get(position).getDataType())) {
             return TYPE_4;// 第四栏 公司动态
+        } else if ("99".equals(dataList.get(position).getDataType())) {
+            return TYPE_99;// 加载更多
         } else {
             return 0;
         }
@@ -325,6 +335,11 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             newsListview = (ListView)itemView.findViewById(R.id.home_new_list);
             newsLoadmore = (Button) itemView.findViewById(R.id.news_loadmore);
+        }
+    }
+    class Type99Holder extends RecyclerView.ViewHolder{
+        public Type99Holder(View itemView) {
+            super(itemView);
         }
     }
 }

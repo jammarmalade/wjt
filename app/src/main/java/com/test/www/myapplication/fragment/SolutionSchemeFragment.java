@@ -42,7 +42,7 @@ import java.util.List;
 
 public class SolutionSchemeFragment extends BaseFragment {
     private String cacheName = "fragment_solution_scheme";//缓存名字
-    private int cacheTime = 10;//缓存时间
+    private int cacheTime = BaseActivity.getCacheTime();//缓存时间
     private View view;
     private RecyclerView mRecyclerView;
     private SolutionSchemeAdapter mAdapter;

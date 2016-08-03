@@ -40,7 +40,7 @@ public class BusinessActivity extends BaseActivity{
     private static final String REQUEST_URL = BaseActivity.REQUEST_HOST+"?c=api&a=business";
     private String cacheName = "activity_business";//缓存名字
     private RecyclerView mRecyclerView;
-    private int cacheTime = 10;//缓存时间
+//    private int cacheTime = 10;//缓存时间
 
     private ArrayList<BusinessModel> businessData;
     private BusinessListAdapter mAdapter;

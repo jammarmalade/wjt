@@ -40,9 +40,10 @@ public class HomeActivity extends BaseActivity {
 
     private String cacheName = "activity_home";//缓存名字
     private RecyclerView mRecyclerView;
+    private final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
     private HomeListAdapter mAdapter;
     private Integer newsListNextPage = 2;//公司动态列表初始页数
-    private int cacheTime = 10;//缓存时间
+//    private int cacheTime = 10;//缓存时间
     private int newsId = 23;//公司动态的导航id
     private ArrayList<HomeModel> homeData;
     private final int UPDATE_NEWS = 0;//更新公司动态列表
@@ -55,6 +56,8 @@ public class HomeActivity extends BaseActivity {
             }
         }
     };
+    private Boolean isLoading = false;//是否正在加载公司动态数据
+    private Boolean isAlertMsg = false;//是否提示过没有数据了
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +87,12 @@ public class HomeActivity extends BaseActivity {
             if(homeData.size()>0){
                 //使用  recyclerView
                 mRecyclerView = (RecyclerView) findViewById(R.id.content_main_RV);
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-                mAdapter = new HomeListAdapter(this, homeData);
+                mRecyclerView.setLayoutManager(linearLayoutManager);
+                //加入一个加载更多的视图
+                HomeModel loadMore = new HomeModel();
+                loadMore.setDataType("99");
+                homeData.add(loadMore);
+                mAdapter = new HomeListAdapter(HomeActivity.this, homeData);
                 mAdapter.setOnItemClickLitener(new HomeListAdapter.OnItemClickLitener(){
                     @Override
                     public void onItemClick(View view, int position){
@@ -108,13 +115,22 @@ public class HomeActivity extends BaseActivity {
                             case R.id.frag_home_block_6:
                                 CooperationActivity.actionStart(HomeActivity.this);
                                 break;
-                            case R.id.news_loadmore:
-                                getNewsList();
-                                break;
                         }
                     }
                 });
                 mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                        if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                            int lastVisiblePosition = linearLayoutManager.findLastVisibleItemPosition();
+                            if(lastVisiblePosition >= linearLayoutManager.getItemCount() - 1){
+                                getNewsList();
+                            }
+                        }
+                    }
+                });
             }else{
                 mToast("没有数据 - 102");
             }
@@ -126,10 +142,24 @@ public class HomeActivity extends BaseActivity {
     }
     //获取公司动态列表
     public void getNewsList(){
-        if(newsListNextPage.equals(0)){
-            mToast("没有数据啦~");
-            findViewById(R.id.news_loadmore_ll).setVisibility(View.GONE);
+        //若是正在加载，则返回
+        if(isLoading){
             return ;
+        }
+        if(newsListNextPage.equals(0)){
+            if(!isAlertMsg) {
+                mToast("没有数据啦~");
+                isAlertMsg = true;
+            }
+            mRecyclerView.findViewById(R.id.loadmore_ll).setVisibility(View.GONE);
+            return ;
+        }
+        isLoading = true;//标记为正在加载
+        mRecyclerView.findViewById(R.id.loadmore_ll).setVisibility(View.VISIBLE);
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e){
+            e.printStackTrace();
         }
         final String newsCacheName = "newsList"+newsListNextPage;
         List cacheData = CacheUtil.readJson(BaseApplication.getContext() ,newsCacheName ,cacheTime);
@@ -182,11 +212,7 @@ public class HomeActivity extends BaseActivity {
                 JSONObject tmpNewsObj = tmpRes.getJSONObject(0);
                 //更改下一页
                 newsListNextPage = tmpNewsObj.getInt("nextPage");
-                //若是为 0 就隐藏加载更多
-                if(newsListNextPage.equals(0)){
-                    LogUtil.d(TAG," - "+newsListNextPage);
-                    findViewById(R.id.news_loadmore_ll).setVisibility(View.GONE);
-                }
+
                 JSONArray tmpNewsList = tmpNewsObj.getJSONArray("newsList");
                 for(int i=0;i <tmpNewsList.length();i++) {
                     JSONObject tmpData = tmpNewsList.getJSONObject(i);
@@ -208,6 +234,8 @@ public class HomeActivity extends BaseActivity {
         }else{
             mToast("没有公司动态数据");
         }
+        isLoading = false;//标记为结束加载
+//        mRecyclerView.findViewById(R.id.loadmore_ll).setVisibility(View.GONE);
     }
     //获取数据
     public void onQueryData(){

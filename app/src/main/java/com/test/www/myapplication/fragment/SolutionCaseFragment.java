@@ -30,7 +30,7 @@ import java.util.List;
 
 public class SolutionCaseFragment extends BaseFragment {
     private String cacheName = "fragment_solution_case";//缓存名字
-    private int cacheTime = 10;//缓存时间
+    private int cacheTime = BaseActivity.getCacheTime();//缓存时间
     private RecyclerView mRecyclerView;
     private SolutionCaseAdapter mAdapter;
     private ArrayList<CaseModel> caseData;

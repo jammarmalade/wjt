@@ -36,7 +36,7 @@ public class CooperationActivity extends BaseActivity{
 
     private static final String REQUEST_URL = BaseActivity.REQUEST_HOST+"?c=api&a=cooperation";
     private String cacheName = "activity_cooperation";//缓存名字
-    private int cacheTime = 10;//缓存时间
+//    private int cacheTime = 10;//缓存时间
     private ArrayMap<String ,String> cooperationData = new ArrayMap<>();
     private TextView cooperation1;
     private TextView coon_setp1;

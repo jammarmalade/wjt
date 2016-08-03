@@ -40,7 +40,7 @@ public class ExperienceActivity extends BaseActivity{
 
     private static final String REQUEST_URL = BaseActivity.REQUEST_HOST+"?c=api&a=experience";
     private String cacheName = "activity_experience";//缓存名字
-    private int cacheTime = 10;//缓存时间
+//    private int cacheTime = 10;//缓存时间
     private RecyclerView mRecyclerView;
     private ExperienceAdapter mAdapter;
     private ArrayList<ExperienceModel> experienceData;
