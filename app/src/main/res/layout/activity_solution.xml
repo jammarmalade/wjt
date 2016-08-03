@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="5dp"
-    tools:context=".activity.SolutionActivity">
+    tools:context="com.app.www.weijingtong.activity.SolutionActivity">
 
-    <com.test.www.myapplication.util.PagerSlidingTabStrip
+    <com.app.www.weijingtong.util.PagerSlidingTabStrip
         android:id="@+id/solution_tabs"
         android:layout_width="match_parent"
         android:layout_height="40dp"

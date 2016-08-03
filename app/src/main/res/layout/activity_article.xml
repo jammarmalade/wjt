@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    tools:context=".activity.ArticleActivity">
+    tools:context="com.app.www.weijingtong.activity.ArticleActivity"
+    android:id="@+id/article_SV">
 
     <LinearLayout
         android:orientation="vertical"

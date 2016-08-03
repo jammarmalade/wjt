@@ -7,7 +7,7 @@ android {
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
     defaultConfig {
-        applicationId "com.test.www.myapplication"
+        applicationId "com.app.www.weijingtong"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.test.www.myapplication">
+    package="com.app.www.weijingtong">
 
     <!-- 联网权限 -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -12,9 +12,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".model.BaseApplication">
+        android:name="com.app.www.weijingtong.model.BaseApplication">
         <activity
-            android:name=".activity.HomeActivity"
+            android:name="com.app.www.weijingtong.activity.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,37 +25,37 @@
         </activity>
 
         <activity
-            android:name=".activity.AboutActivity"
+            android:name="com.app.www.weijingtong.activity.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activity.AdvantageActivity"
+            android:name="com.app.www.weijingtong.activity.AdvantageActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".activity.BusinessActivity"
+            android:name="com.app.www.weijingtong.activity.BusinessActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".activity.CooperationActivity"
+            android:name="com.app.www.weijingtong.activity.CooperationActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".activity.ExperienceActivity"
+            android:name="com.app.www.weijingtong.activity.ExperienceActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".activity.SolutionActivity"
+            android:name="com.app.www.weijingtong.activity.SolutionActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".activity.NavArticleActivity"
+            android:name="com.app.www.weijingtong.activity.NavArticleActivity"
             android:launchMode="singleTask"
-            android:parentActivityName=".activity.ExperienceActivity"/>
+            android:parentActivityName="com.app.www.weijingtong.activity.ExperienceActivity"/>
         <activity
-            android:name=".activity.ArticleActivity"
+            android:name="com.app.www.weijingtong.activity.ArticleActivity"
             android:launchMode="singleTask"
-            android:parentActivityName=".activity.HomeActivity"/>
+            android:parentActivityName="com.app.www.weijingtong.activity.HomeActivity"/>
     </application>
 
 </manifest>
