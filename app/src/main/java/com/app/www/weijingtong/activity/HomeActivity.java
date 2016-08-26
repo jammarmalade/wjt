@@ -154,11 +154,7 @@ public class HomeActivity extends BaseActivity {
         }
         isLoading = true;//标记为正在加载
         mRecyclerView.findViewById(R.id.loadmore_ll).setVisibility(View.VISIBLE);
-        try{
-            Thread.sleep(1000);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
         final String newsCacheName = "newsList"+newsListNextPage;
         List cacheData = CacheUtil.readJson(BaseApplication.getContext() ,newsCacheName ,cacheTime);
         String requestData = "id="+newsId+"&page="+newsListNextPage;
