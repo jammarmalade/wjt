@@ -47,8 +47,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public int cacheTime = 600;//缓存时间
     public static int cacheTimeS = 600;//缓存时间
 
-    public static final String REQUEST_HOST = "http://192.168.1.28/php/www_weijingtong_com/";//公司
+//    public static final String REQUEST_HOST = "http://192.168.1.28/php/www_weijingtong_com/";//公司
 //    public static final String REQUEST_HOST = "http://192.168.1.46/wjt/";//家
+    public static final String REQUEST_HOST = "http://www.weijingtong.com/";//线上
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,7 +203,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         switch (item.getItemId()) {
             case R.id.action_settings:
-                mToast("162 - setting");
+//                mToast("162 - setting");
                 break;
         }
 

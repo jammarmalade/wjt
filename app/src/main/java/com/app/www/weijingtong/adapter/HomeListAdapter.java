@@ -321,11 +321,11 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
     class Type4Holder extends RecyclerView.ViewHolder{
         ListView newsListview;
-        Button newsLoadmore;
+//        Button newsLoadmore;
         public Type4Holder(View itemView) {
             super(itemView);
             newsListview = (ListView)itemView.findViewById(R.id.home_new_list);
-            newsLoadmore = (Button) itemView.findViewById(R.id.news_loadmore);
+//            newsLoadmore = (Button) itemView.findViewById(R.id.news_loadmore);
         }
     }
     class Type99Holder extends RecyclerView.ViewHolder{

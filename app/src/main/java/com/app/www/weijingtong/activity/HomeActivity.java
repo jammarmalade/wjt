@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -239,9 +240,11 @@ public class HomeActivity extends BaseActivity {
             HttpUtil.sendHttpRequest(REQUEST_URL, "",new HttpCallbackListener() {
                 @Override
                 public void onFinish(String response) {
+
                     Object res = parseResult(response);
                     if (res.equals("")) {
                         onError("解析数据失败",new Exception());
+                        Log.d(TAG,REQUEST_URL+" - "+response);
                     }else{
                         //存储数据
                         CacheUtil.writeJson(BaseApplication.getContext(), res.toString(), cacheName, false);
