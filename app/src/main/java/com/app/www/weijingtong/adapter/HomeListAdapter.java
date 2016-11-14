@@ -7,23 +7,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.app.www.weijingtong.R;
 import com.app.www.weijingtong.activity.ArticleActivity;
+import com.app.www.weijingtong.activity.BaseActivity;
+import com.app.www.weijingtong.model.BaseApplication;
 import com.app.www.weijingtong.model.ClientModel;
 import com.app.www.weijingtong.model.HomeModel;
 import com.app.www.weijingtong.model.IconModel;
+import com.app.www.weijingtong.model.NewsModel;
 import com.app.www.weijingtong.util.Unity;
 import com.app.www.weijingtong.util.imageLoad.ImageCacheManager;
-import com.app.www.weijingtong.R;
-import com.app.www.weijingtong.activity.BaseActivity;
-import com.app.www.weijingtong.model.BaseApplication;
-import com.app.www.weijingtong.model.NewsModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

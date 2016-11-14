@@ -40,7 +40,7 @@ public class HttpUtil {
                         //4.向服务器写入数据
                         connection.getOutputStream().write(data.getBytes());
                     }
-                    
+
                     InputStream in = connection.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     StringBuilder response  = new StringBuilder();

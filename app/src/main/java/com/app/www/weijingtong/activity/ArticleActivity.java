@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.app.www.weijingtong.model.ArticleModel;
 import com.app.www.weijingtong.util.HttpCallbackListener;
+import com.app.www.weijingtong.util.LogUtil;
 import com.app.www.weijingtong.util.Unity;
 import com.app.www.weijingtong.R;
 import com.app.www.weijingtong.adapter.ArticleAdapter;

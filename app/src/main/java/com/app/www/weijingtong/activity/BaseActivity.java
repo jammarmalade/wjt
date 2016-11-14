@@ -49,7 +49,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
 //    public static final String REQUEST_HOST = "http://192.168.1.28/php/www_weijingtong_com/";//公司
 //    public static final String REQUEST_HOST = "http://192.168.1.46/wjt/";//家
-    public static final String REQUEST_HOST = "http://www.weijingtong.com/";//线上
+//    public static final String REQUEST_HOST = "http://www.weijingtong.com/";//线上
+    public static final String REQUEST_HOST = "https://www.weijingtong.com/";//线上，https
 
 
     @Override
