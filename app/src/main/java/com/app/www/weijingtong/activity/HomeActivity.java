@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.app.www.weijingtong.model.BaseApplication;
 import com.app.www.weijingtong.model.NewsModel;
 import com.app.www.weijingtong.util.CacheUtil;
 import com.app.www.weijingtong.util.HttpUtil;
+import com.app.www.weijingtong.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +72,33 @@ public class HomeActivity extends BaseActivity {
         toolBarTitle = getResources().getString(R.string.app_name);
         //初始化导航
         initNav();
+        //下拉刷新
+        swipeRefresh = (SwipeRefreshLayout)findViewById(R.id.refresh);
+        swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_light);
 
+        //下拉刷新事件
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            Thread.sleep(2000);
+                        }catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                onQueryData();
+                                swipeRefresh.setRefreshing(false);
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
         //设置数据
         onQueryData();
     }
@@ -126,6 +154,12 @@ public class HomeActivity extends BaseActivity {
                             int lastVisiblePosition = linearLayoutManager.findLastVisibleItemPosition();
                             if(lastVisiblePosition >= linearLayoutManager.getItemCount() - 1){
                                 getNewsList();
+//                                new Thread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        getNewsList();
+//                                    }
+//                                }).start();
                             }
                         }
                     }

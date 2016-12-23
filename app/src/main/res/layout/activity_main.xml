@@ -12,6 +12,8 @@
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
     <!-- 第二个位置 -->
     <!-- 用来放Drawerlayout中的内容，
     这里使用NavigationView来实现类似Google pLay中的侧滑栏效果，
@@ -42,4 +44,14 @@ app:itemTextColor：  用来设置Nav中，menu item的颜色选择器。
 app:itemIconTint:
 app:itemBackground:
     -->
+    <!--悬浮按钮
+    elevation 悬浮高度-->
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/fab"
+        android:layout_gravity ="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_menu_send"
+        app:elevation="8dp"/>
 </android.support.v4.widget.DrawerLayout>

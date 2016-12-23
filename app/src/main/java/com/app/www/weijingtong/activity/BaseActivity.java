@@ -9,9 +9,11 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
@@ -46,6 +48,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public static String networkType;
     public int cacheTime = 600;//缓存时间
     public static int cacheTimeS = 600;//缓存时间
+    public SwipeRefreshLayout swipeRefresh;
 
 //    public static final String REQUEST_HOST = "http://192.168.1.28/php/www_weijingtong_com/";//公司
 //    public static final String REQUEST_HOST = "http://192.168.1.46/wjt/";//家
@@ -95,6 +98,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         //选中状态
         navigationView.getMenu().getItem(checkedItemId).setChecked(true);
+        //悬浮按钮事件
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BaseActivity.mToastStatic("Fab clicked");
+            }
+        });
     }
 
     @Override
@@ -194,6 +205,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
+
     //Action按钮 点击事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
